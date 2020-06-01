@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<included>
+	<include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+	<include resource="org/springframework/boot/logging/logback/console-appender.xml"/>
+	<springProperty scope="context" name="activeProfile" source="spring.profiles.active"/>
+
+	<appender name="JSON" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder class="net.logstash.logback.encoder.LogstashEncoder">
+			<includeCallerData>true</includeCallerData>
+			<includeContext>false</includeContext>
+			<writeVersionAsInteger>true</writeVersionAsInteger>
+		</encoder>
+	</appender>
+
+	<springProfile name="DEV, TEST, PROD">
+		<root level="WARN">
+			<appender-ref ref="JSON"/>
+			<appender-ref ref="ROLLBAR"/>
+		</root>
+	</springProfile>
+
+	<springProfile name="LOCAL">
+		<root level="WARN">
+			<appender-ref ref="CONSOLE"/>
+		</root>
+	</springProfile>
+
+	<shutdownHook class="ch.qos.logback.core.hook.DelayingShutdownHook"/>
+</included>

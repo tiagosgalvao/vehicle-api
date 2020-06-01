@@ -1,0 +1,135 @@
+# ------------------------------------------------------------------------------
+# Custom properties
+api.info:
+  title: vehicle-api
+  description: vehicle-api, REST API
+  version: v1
+  email: galvaoti@gmail.com
+  name: Tiago
+  url: https://www.linkedin.com/in/tiagogalvaosenioritpro/
+
+db:
+  host: localhost
+  port: 5432
+  database: vehicle
+  connection-params: autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+  username: postgres
+  password: YourStrongPassw0rd
+
+springdoc:
+  api-docs:
+    path: /docs/json
+    groups:
+      enabled: true
+  swagger-ui:
+    path: /docs
+    groups-order: DESC
+  group-configs:
+    - group: Vehicles V1
+      paths-to-match: /v1/**
+
+# ------------------------------------------------------------------------------
+# Spring defined properties
+
+server:
+  port: 8081
+  servlet:
+    context-path: /api
+    session:
+      timeout: 5
+
+spring:
+  application:
+    name: vehicle-api
+
+  main:
+    allow-bean-definition-overriding: true
+
+  messages:
+    basename: text/messages
+
+  data:
+    rest:
+      base-path: /api
+    web:
+      pageable:
+        max-page-size: 0x7fffffff
+
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://${db.host}:${db.port}/${db.database}?${db.connection-params}
+    username: ${db.username}
+    password: ${db.password}
+
+    hikari:
+      max-lifetime: 600000
+      pool-name: db-conn-pool
+      minimum-idle: 10
+      maximum-pool-size: 30
+      connection-timeout: 10000
+      auto-commit: false
+      leak-detection-threshold: 120000
+
+  jpa:
+    open-in-view: false
+    hibernate:
+      naming.physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        show_sql: false
+        format_sql: true
+        use_sql_comments: true
+        hbm2ddl.auto: none
+        auto_close_session: true
+        connection:
+          useUnicode: true
+          characterEncoding: UTF-8
+          charSet: UTF-8
+        generate_statistics: false
+        temp:
+          use_jdbc_metadata_defaults: false
+
+  jackson:
+    serialization:
+      indent_output: false
+      write_dates_as_timestamps: false
+    date-format: yyyy-MM-dd'T'HH:mm:ss.SSS'Z'
+
+logging:
+  level:
+    com.galvao: TRACE
+    com.galvao.vehicle: DEBUG
+    org.springframework: INFO
+    org.springframework.web: INFO
+    org.springframework.security: INFO
+    org.hibernate: INFO
+    org.hibernate.SQL: INFO
+    org.hibernate.stat.internal: INFO
+    org.hibernate.type.descriptor.sql.BasicBinder: INFO
+    #org.hibernate.type: TRACE
+    com.mchange: OFF
+    net.sf: OFF
+    org.springframework.aop.framework.CglibAopProxy: ERROR
+  pattern:
+    console: "%date{'yyyy-MM-dd HH:mm:ss,SSS'} %-5level [%mdc{X-B3-TraceId}/%mdc{X-B3-SpanId}] %logger{1}:%line - %msg%n"
+
+management:
+  endpoints:
+    web:
+      base-path: /
+
+logbook:
+  exclude:
+    - /public/
+    - /management/
+    - /api/webjars/**
+    - /api/null/**
+    - /api/error
+    - /api/health
+    - /api/health/liveness
+    - /api/health/readiness
+    - /api/docs
+    - /api/csrf
+    - /api/

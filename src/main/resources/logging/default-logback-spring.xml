@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="false" scan="false">
+	<include resource="com/galvao/vehicle/logging/base-logback-spring.xml"/>
+</configuration>
