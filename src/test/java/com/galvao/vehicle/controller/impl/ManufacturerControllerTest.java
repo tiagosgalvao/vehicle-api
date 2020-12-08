@@ -123,7 +123,7 @@ public class ManufacturerControllerTest extends BaseControllerTest<Manufacturer,
 		repository.save(entity2);
 
 		mockMvc.perform(delete(rootUrl + "/" + entity1.getId()).with(csrf()))
-				.andExpect(status().isOk()).andDo(print());
+				.andExpect(status().isNoContent());
 
 		mockMvc.perform(get(rootUrl))
 				.andExpect(status().isOk()).andDo(print())

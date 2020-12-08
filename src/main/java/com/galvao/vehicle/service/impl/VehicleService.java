@@ -34,7 +34,7 @@ public class VehicleService extends BaseService<Vehicle, VehicleDto, VehicleRepo
 
 	@Autowired
 	public VehicleService(VehicleRepository vehicleRepository, VehicleMapper vehicleMapper, ModelRepository modelRepository) {
-		super(vehicleRepository, vehicleMapper);
+		super(vehicleMapper, vehicleRepository, Vehicle.class);
 		this.modelRepository = modelRepository;
 	}
 
@@ -50,8 +50,7 @@ public class VehicleService extends BaseService<Vehicle, VehicleDto, VehicleRepo
 					BeanUtils.copyProperties(vehicle, vehicleFromFile);
 					Model model = models.get(vehicleFromFile.getModel());
 					if (Objects.isNull(model)) {
-						model = modelRepository.findOneByIdAndStatus(vehicleFromFile.getModel(), Status.ACTIVE);
-						models.put(model.getId(), model);
+						modelRepository.findOneByIdAndStatus(vehicleFromFile.getModel(), Status.ACTIVE).map(m -> models.put(m.getId(), m));
 					}
 					vehicle.setModel(model);
 					vehicles.add(vehicle);

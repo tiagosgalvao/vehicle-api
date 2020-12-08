@@ -13,6 +13,6 @@ import org.springframework.stereotype.Service;
 public class ModelService extends BaseService<Model, ModelDto, ModelRepository, ModelMapper> {
 	@Autowired
 	public ModelService(ModelRepository modelRepository, ModelMapper modelMapper) {
-		super(modelRepository, modelMapper);
+		super(modelMapper, modelRepository, Model.class);
 	}
 }

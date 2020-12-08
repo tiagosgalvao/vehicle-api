@@ -17,6 +17,7 @@ import org.testcontainers.shaded.org.apache.commons.io.IOUtils;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Optional;
 
 import static com.galvao.vehicle.model.enums.Status.ACTIVE;
 import static org.apache.commons.codec.Charsets.UTF_8;
@@ -49,7 +50,7 @@ public class VehicleServiceTest {
 	@Test
 	public void shouldCreateInBatchMode() throws IOException {
 		Model model = Model.builder().id(1L).name("Model").build();
-		when(modelRepository.findOneByIdAndStatus(1L, ACTIVE)).thenReturn(model);
+		when(modelRepository.findOneByIdAndStatus(1L, ACTIVE)).thenReturn(Optional.of(model));
 
 		MultipartFile file = getTestFile();
 		assertThatCode(() -> vehicleService.batchCreate(file)).doesNotThrowAnyException();

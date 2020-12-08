@@ -9,9 +9,11 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.repository.NoRepositoryBean;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
+import java.util.Optional;
+
 @NoRepositoryBean
 public interface BaseRepository<E extends BaseEntity> extends PagingAndSortingRepository<E, Long>, JpaSpecificationExecutor<E> {
 	Page<E> findAllByStatus(Status status, Pageable pageable);
 
-	E findOneByIdAndStatus(Long id, Status status);
+	Optional<E> findOneByIdAndStatus(Long id, Status status);
 }
