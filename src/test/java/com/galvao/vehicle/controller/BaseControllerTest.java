@@ -8,7 +8,7 @@ import com.galvao.vehicle.repository.BaseRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-public abstract class BaseControllerTest<E extends BaseEntity, D extends BaseDto<E>, R extends BaseRepository<E>, M extends BaseMapper<E, D>> {
+public abstract class BaseControllerTest<E extends BaseEntity, D extends BaseDto, R extends BaseRepository<E>, M extends BaseMapper<E, D>> {
 	@Autowired
 	protected ObjectMapper objectMapper;
 	@Autowired

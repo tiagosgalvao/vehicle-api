@@ -16,4 +16,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @RestController
 @RequestMapping("v1/models")
 public class ModelController extends BaseController<Model, ModelDto, ModelRepository, ModelMapper, ModelService> {
+	public ModelController(ModelService service) {
+		super(service);
+	}
 }

@@ -2,6 +2,7 @@ import org.flywaydb.gradle.task.FlywayMigrateTask
 
 plugins {
 	id "java"
+	id "idea"
 	id "maven-publish"
 	id "org.springframework.boot" version "2.2.6.RELEASE"
 	id "io.spring.dependency-management" version "1.0.8.RELEASE"
@@ -13,8 +14,8 @@ plugins {
 
 group = "com.galvao.vehicle"
 version = "1.0.0-SNAPSHOT"
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
+sourceCompatibility = 1.11
+targetCompatibility = 1.11
 
 ext {
 	springCloudVersion = "Greenwich.RELEASE"

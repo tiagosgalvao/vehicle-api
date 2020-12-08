@@ -16,4 +16,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @RestController
 @RequestMapping("v1/manufacturers")
 public class ManufacturerController extends BaseController<Manufacturer, ManufacturerDto, ManufacturerRepository, ManufacturerMapper, ManufacturerService> {
+	public ManufacturerController(ManufacturerService service) {
+		super(service);
+	}
 }

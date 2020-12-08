@@ -11,6 +11,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class ManufacturerService extends BaseService<Manufacturer, ManufacturerDto, ManufacturerRepository, ManufacturerMapper> {
 	public ManufacturerService(ManufacturerRepository manufacturerRepository, ManufacturerMapper manufacturerMapper) {
-		super(Manufacturer.class, manufacturerRepository, manufacturerMapper);
+		super(manufacturerRepository, manufacturerMapper);
 	}
 }

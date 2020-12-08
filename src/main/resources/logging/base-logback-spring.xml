@@ -12,10 +12,9 @@
 		</encoder>
 	</appender>
 
-	<springProfile name="DEV, TEST, PROD">
+	<springProfile name="DEV, QA, PRD">
 		<root level="WARN">
 			<appender-ref ref="JSON"/>
-			<appender-ref ref="ROLLBAR"/>
 		</root>
 	</springProfile>
 

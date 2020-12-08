@@ -1,10 +1,15 @@
 # Vehicle Rest API
-Minimal [Spring Boot](http://projects.spring.io/spring-boot)
+
+Me, Tiago Galvao hereby declare: that this code is authentic created by my own authorship, utilizing the listed technologies below. 
+It might or not have also been resulted from for some proof of concept (Poc), personal purposes or even selection process, although 
+the company(ies) involved won`t be disclosed. Probably there is a chance that during the development process some references, tutorials, 
+videos from the web or books supported me in order to support best practices resulting in a good application. 
 
 ## Requirements
 For building and running the application you need:
 
-- [JDK 8](https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html)
+- [Spring Boot](http://projects.spring.io/spring-boot)
+- [JDK 11](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html)
 - [Gradle](https://gradle.org)
 
 ## Introduction

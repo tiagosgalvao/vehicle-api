@@ -1,11 +1,8 @@
 package com.galvao.vehicle.model.dto.impl;
 
 import com.galvao.vehicle.model.dto.BaseDto;
-import com.galvao.vehicle.model.entity.impl.Vehicle;
 import com.galvao.vehicle.model.enums.Colour;
 import com.galvao.vehicle.model.enums.Fuel;
-
-import org.springframework.data.jpa.domain.Specification;
 
 import java.math.BigDecimal;
 
@@ -18,7 +15,7 @@ import lombok.ToString;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
-public class VehicleDto extends BaseDto<Vehicle> {
+public class VehicleDto extends BaseDto {
 	@NotNull
 	private ModelDto model;
 	private Boolean abs;
@@ -43,9 +40,4 @@ public class VehicleDto extends BaseDto<Vehicle> {
 	private Boolean radio;
 	@NotNull
 	private Integer year;
-
-	@Override
-	public Specification<Vehicle> getSpecification() {
-		return (root, query, cb) -> cb.equal(root.get("id"), super.getId());
-	}
 }

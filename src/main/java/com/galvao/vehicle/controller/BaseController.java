@@ -6,7 +6,6 @@ import com.galvao.vehicle.model.entity.BaseEntity;
 import com.galvao.vehicle.repository.BaseRepository;
 import com.galvao.vehicle.service.BaseService;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -21,17 +20,20 @@ import javax.validation.Valid;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
+import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
 import static org.springframework.http.HttpStatus.CREATED;
 
-public abstract class BaseController<E extends BaseEntity, D extends BaseDto<E>, R extends BaseRepository<E>, M extends BaseMapper<E, D>, S extends BaseService<E, D, R, M>> {
-	@Autowired
+@AllArgsConstructor
+public abstract class BaseController<E extends BaseEntity, D extends BaseDto, R extends BaseRepository<E>, M extends BaseMapper<E, D>, S extends BaseService<E, D, R, M>> {
+
 	protected S service;
 
 	@Operation(description = "Create a new entity")
 	@PostMapping
 	@ResponseStatus(CREATED)
-	public D create(@RequestBody @Valid final D dto) throws Exception {
+	public D create(@RequestBody @Valid final D dto) {
 		return service.create(dto);
 	}
 

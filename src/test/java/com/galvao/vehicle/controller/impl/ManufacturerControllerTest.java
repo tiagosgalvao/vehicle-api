@@ -13,7 +13,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ActiveProfiles;
@@ -105,7 +104,8 @@ public class ManufacturerControllerTest extends BaseControllerTest<Manufacturer,
 		ManufacturerDto request = manufacturerMapper.entityToDto(manufacturer);
 		request.setName("Manufacturer ETC");
 
-		mockMvc.perform(put(rootUrl + "/" + manufacturer.getId()).with(csrf()).contentType(APPLICATION_JSON).content(objectMapper.writeValueAsString(request)))
+		mockMvc.perform(put(rootUrl + "/" + manufacturer.getId()).with(csrf())
+				.contentType(APPLICATION_JSON).content(objectMapper.writeValueAsString(request)))
 				.andDo(print())
 				.andExpect(status().isOk());
 

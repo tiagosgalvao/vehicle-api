@@ -7,7 +7,6 @@ import com.galvao.vehicle.model.entity.impl.Vehicle;
 import com.galvao.vehicle.repository.impl.VehicleRepository;
 import com.galvao.vehicle.service.impl.VehicleService;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,12 +22,12 @@ import static org.springframework.http.MediaType.MULTIPART_FORM_DATA_VALUE;
 @RestController
 @RequestMapping("v1/vehicles")
 public class VehicleController extends BaseController<Vehicle, VehicleDto, VehicleRepository, VehicleMapper, VehicleService> {
-
-	@Autowired
-	private VehicleService vehicleService;
+	public VehicleController(VehicleService service) {
+		super(service);
+	}
 
 	@PostMapping(value = "/batch", consumes = MULTIPART_FORM_DATA_VALUE)
 	public void upload(@RequestPart @RequestParam MultipartFile file) {
-		vehicleService.batchCreate(file);
+		this.service.batchCreate(file);
 	}
 }

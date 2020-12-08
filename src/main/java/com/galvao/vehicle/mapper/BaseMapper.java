@@ -6,7 +6,7 @@ import com.galvao.vehicle.model.entity.BaseEntity;
 import org.mapstruct.MappingTarget;
 import org.springframework.data.domain.Page;
 
-public interface BaseMapper<E extends BaseEntity, D extends BaseDto<E>> {
+public interface BaseMapper<E extends BaseEntity, D extends BaseDto> {
 
 	void dtoToEntity(D source, @MappingTarget E target);
 

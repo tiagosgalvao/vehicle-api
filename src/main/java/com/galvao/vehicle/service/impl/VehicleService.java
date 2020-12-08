@@ -34,7 +34,7 @@ public class VehicleService extends BaseService<Vehicle, VehicleDto, VehicleRepo
 
 	@Autowired
 	public VehicleService(VehicleRepository vehicleRepository, VehicleMapper vehicleMapper, ModelRepository modelRepository) {
-		super(Vehicle.class, vehicleRepository, vehicleMapper);
+		super(vehicleRepository, vehicleMapper);
 		this.modelRepository = modelRepository;
 	}
 

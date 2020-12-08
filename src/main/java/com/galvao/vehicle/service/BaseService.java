@@ -14,23 +14,25 @@ import static com.galvao.vehicle.model.enums.Status.ACTIVE;
 import static com.galvao.vehicle.model.enums.Status.INACTIVE;
 
 @Transactional
-public abstract class BaseService<E extends BaseEntity, D extends BaseDto<E>, R extends BaseRepository<E>, M extends BaseMapper<E, D>> {
+public abstract class BaseService<E extends BaseEntity, D extends BaseDto, R extends BaseRepository<E>, M extends BaseMapper<E, D>> {
 
 	protected M mapper;
 	protected R repository;
-	private Class<E> clazz;
+	// TODO refactor
+	// private Class<E> clazz;
 
 	@Autowired
-	public BaseService(Class<E> clazz, R repository, M mapper) {
-		this.clazz = clazz;
+	public BaseService(/*Class<E> clazz, */R repository, M mapper) {
+		// this.clazz = clazz;
 		this.repository = repository;
 		this.mapper = mapper;
 	}
 
-	public D create(final D dto) throws Exception {
-		E entity = repository.findOne(dto.getSpecification()).orElse(clazz.getDeclaredConstructor().newInstance());
-		mapper.dtoToEntity(dto, entity);
-		return mapper.entityToDto(repository.save(entity));
+	public D create(final D dto) {
+		return repository.findById(dto.getId()).map(entity -> mapper.entityToDto(entity)).orElse(null);
+		// E entity = repository.findOne(dto.getSpecification()).orElse(clazz.getDeclaredConstructor().newInstance());
+		// mapper.dtoToEntity(dto, entity);
+		// return mapper.entityToDto(repository.save(entity));
 	}
 
 	public void deleteById(final Long id) {
